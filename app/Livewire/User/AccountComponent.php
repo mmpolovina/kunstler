@@ -10,4 +10,5 @@ class AccountComponent extends Component
     {
         return view('livewire.user.account-component');
     }
+    
 }

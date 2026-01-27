@@ -18,7 +18,7 @@
                     @auth
 
                         <li>
-                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="{{ route('account') }}">Your Account</a>
                         </li>
                         @if (auth()->user()->is_admin)
 

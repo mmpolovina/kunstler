@@ -12,7 +12,6 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 
-
 class CategoryComponent extends Component
 {
 

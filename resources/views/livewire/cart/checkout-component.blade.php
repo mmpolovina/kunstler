@@ -14,7 +14,7 @@
     </div>
 
     <div class="container">
-
+    
         @if($cart = \App\Helpers\Cart\Cart::getCart())
 
                 <div class="row">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', \App\Livewire\HomeComponent::class)->name('home');
 Route::get('/category/{slug}', \App\Livewire\Product\CategoryComponent::class)->name('category');
 Route::get('/product/{slug}', \App\Livewire\Product\ProductComponent::class)->name('product');
@@ -18,4 +19,7 @@ Route::middleware('auth')->group(function () {
         auth()->logout();
         return redirect()->route('login');
     })->name('logout');
+    Route::get('/account', \App\Livewire\User\AccountComponent::class)->name('account');
+    Route::get('/change-account', \App\Livewire\User\ChangeAccountComponent::class)->name('change-account');
+    Route::get('/orders', \App\Livewire\User\OrderComponent::class)->name('orders');
 });
