@@ -24,17 +24,32 @@
                         <li><a wire:navigate href="{{ route('account') }}">Account Overview</a></li>
                         <li><a wire:navigate href="{{ route('change-account') }}">Change Account</a></li>
                         <li><a wire:navigate href="{{ route('orders') }}">Orders</a></li>
-                        </ul>
-                    </div>
+                    </ul>
+                </div>
             </div>
 
             <div class="col-lg-8 mb-3">
 
-                                <div class="cart-content p-3 h-100 bg-white">
+                <div class="cart-content p-3 h-100 bg-white">
+                    <h1 class="section-title h5"><span>Account Details</span></h1>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td style="width: 90%;"> {{auth()->user()->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>{{auth()->user()->email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                                    <p>Welcome, {{ auth()->user()->name }}!</p>
-    
-                                </div>
+                    <div class="text-end mt-3">
+                        <a href="{{ route('change-account') }}" class="btn btn-outline-warning" wire:navigate>Change
+                            Account</a>
+                    </div>
+                </div>
             </div>
         </div>
 
