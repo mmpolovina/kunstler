@@ -73,9 +73,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Note</td>
-                <td colspan="2">
-                    {{ $note }}
+                <td colspan="3" style="text-align: left;">
+                   Note:  {{ $note }}
                 </td>
             </tr>
         </table>

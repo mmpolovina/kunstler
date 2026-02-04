@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
-    
+
     public string $name;
     public string $email;
     public string $note;
@@ -32,9 +32,9 @@ class CheckoutComponent extends Component
     public function saveOrder()
     {
         $validated = $this->validate([
-            'name' => 'required|max:255', 
-            'email' => 'required|email|max:255', 
-            'note' => 'required|nullable', 
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'note' => 'string|nullable',
 
         ]);
         $validated = array_merge($validated, [
@@ -42,15 +42,15 @@ class CheckoutComponent extends Component
             'total' => Cart::getCartTotal()
         ]);
 
-        try{
+        try {
             DB::beginTransaction();
 
-                    
+
             $order = Order::query()->create($validated);
             $order_products = [];
             $cart = Cart::getCart();
 
-            foreach($cart as $product_id => $product){
+            foreach ($cart as $product_id => $product) {
                 $order_products[] = [
                     'product_id' => $product_id,
                     'title' => $product['title'],
@@ -62,24 +62,30 @@ class CheckoutComponent extends Component
             }
             $order->orderProducts()->createMany($order_products);
 
-            Mail::to($order['email'])->send(new OrderClient(
-                    $order_products, 
+            try {
+
+                Mail::to($order['email'])->send(new OrderClient(
+                    $order_products,
                     $validated['total'],
-                     $order->id, 
-                     $validated['note']));
+                    $order->id,
+                    $validated['note']
+                ));
 
                 sleep(10);
 
-            Mail::to('admin@kunstler.com')->send(new OrderManager( $order->id));
+                Mail::to('admin@kunstler.com')->send(new OrderManager($order->id));
+            } catch (Exception $e) {
+                Log::error('Mail error: ' . $e->getMessage());
+            }
 
             Cart::clarCart();
-            $this->dispatch('cart-updated');   
+            $this->dispatch('cart-updated');
             $this->js("toastr.success('Susscessful checkout!')");
- 
-            DB::commit();
-            
 
-        } catch (Exception $e ) {
+            DB::commit();
+
+
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             $this->js("toastr.error('Error checkout!')");

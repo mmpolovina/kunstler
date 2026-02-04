@@ -9,13 +9,16 @@ use App\Models\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Livewire\WithPagination;
+
+use Illuminate\Pagination\Paginator;
 use Livewire\Attributes\Url;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class CategoryComponent extends Component
 {
 
-    use WithPagination, CartTrait;
+    use  WithPagination, CartTrait;
     public string $slug = '';
 
     #[Url]
@@ -41,10 +44,11 @@ class CategoryComponent extends Component
     #[Url]
     public $max_price;
 
+
     public function mount($slug)
     {
         $this->slug = $slug;
-        if(!isset($this->sortList[$this->sort]) || 
+        if(!isset($this->sortList[$this->sort]) ||
            !in_array($this->limit, $this->limitList)){
 
             $this->redirectRoute('category', ['slug' => $slug], true);
@@ -69,9 +73,14 @@ class CategoryComponent extends Component
         /**
          * for paginationn corect page
          */
-        $this->resetPage();
+         $this->resetPage();
 
     }
+    public function updatingSearch()
+    {
+        // $this->resetPage();
+    }
+
 
     public function removeFilter($filter_id)
     {
@@ -121,7 +130,7 @@ class CategoryComponent extends Component
         $products = Product::query()
             ->select('products.*')
             ->whereIn('category_id', explode(',', $ids))
-            
+
             ->when($this->selected_filters, function (  Builder $query){
                 $query->join('filter_products', 'filter_products.product_id', '=', 'products.id')
                  ->whereIn('filter_products.filter_id', $this->selected_filters)
@@ -132,7 +141,7 @@ class CategoryComponent extends Component
             ->orderBy($this->sortList[$this->sort]['order_field'], $this->sortList[$this->sort]['order_direction'])
             ->paginate($this->limit);
 
-        return view('livewire.product.category-component', 
+        return view('livewire.product.category-component',
         ['category' => $category, 'products' => $products, 'breadcrumbs' => $breadcrumbs, 'filter_groups' => $filter_groups]);
     }
 }

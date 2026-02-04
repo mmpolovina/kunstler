@@ -41,7 +41,7 @@
 
                         @if ($selected_filters)
                             <button class="btn btn-outline-warning mb-3 w-100" wire:click='clearFilters'>Clear Filters</button>
-                            <div class="selected-filters mb-3"> 
+                            <div class="selected-filters mb-3">
                                 @foreach ($filter_groups as $filter_group)
                                     @foreach ($filter_group as $filter)
                                         @if (in_array($filter->filter_id, $selected_filters))
@@ -51,7 +51,7 @@
                                                 {{ $filter->filter_title}}</p>
                                         @endif
                                     @endforeach
-                                
+
                                 @endforeach
                             </div>
                         @endif
@@ -68,8 +68,8 @@
                                     <div>
                                         <input wire:model.live='selected_filters'
                                             class="form-check-input"
-                                            type="checkbox" 
-                                            value="{{ $filter->filter_id}}" 
+                                            type="checkbox"
+                                            value="{{ $filter->filter_id}}"
                                             id="filter-{{ $filter->filter_id}}">
                                         <label class="form-check-label" for="filter-{{ $filter->filter_id}}">
                                                 {{ $filter->filter_title}}
@@ -77,11 +77,11 @@
                                     </div>
                                     </div>
                                 @endforeach
-                                
+
                             </div>
 
                         @endforeach
-                      
+
                     </div>
 
 
@@ -106,7 +106,7 @@
                                                 {{$item['title']}}</option>
 
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -132,19 +132,7 @@
 
                     <div class="row">
                         <div class="col-12">
-                            {{ $products->links(data: ['scrollTo' => '#products']) }}
-                            {{--<nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
-                            </nav>--}}
+                            {{ $products->links( data: ['scrollTo' => '#products']) }}
                         </div>
                     </div>
                 @else

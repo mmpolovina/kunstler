@@ -48,7 +48,7 @@
 
             <div class="col-md-7 col-lg-8 mb-3">
                 <div class="bg-white product-content p-3 h-100">
-                    <h1 class="section-title h3"><span>{{ $product->title}}</span></h1>
+                    <h1 class="section-title h3"><span>{{ $product->title}} 11111</span></h1>
 
                     <div class="product-price">
                         @if ($product->old_price)
