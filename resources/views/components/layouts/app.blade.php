@@ -74,17 +74,7 @@
                         <a wire:navigate href="{{ route('home') }}" class="header-logo h1">E-Shop</a>
                     </div>
 
-                    <div class="col-sm-6 mt-2 mt-md-0">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="s" placeholder="Searching..."
-                                       aria-label="Searching..." aria-describedby="button-search">
-                                <button class="btn btn-outline-warning" type="submit" id="button-search">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                    @livewire('search.search-form-component')
 
                 </div>
             </div>
@@ -113,7 +103,7 @@
                             <li class="nav-item">
                                 <a wire:navigate class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                             </li>
-                            
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false" data-bs-auto-close="outside">
@@ -121,7 +111,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                       {!! \App\Helpers\Category\Category::getMenu('incs.menu-tpl', 'categories_html') !!}
-                                   
+
                                 </ul>
                             </li>
                         </ul>
@@ -137,7 +127,7 @@
     <livewire:cart.cart-modal-component />
     <main class="main">
 
-        
+
         {{ $slot }}
 
     </main>
