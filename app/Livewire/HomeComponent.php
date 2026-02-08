@@ -16,7 +16,7 @@ class HomeComponent extends Component
 
     public function render()
     {
-        
+
         $hits_products = Product::query()
             ->orderBy('id')
             ->where('is_hit', 1)

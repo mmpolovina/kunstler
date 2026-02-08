@@ -1,4 +1,5 @@
 <div>
+            @section('title') {{'Login'}} @endsection
 
     <div class="container">
         <div class="row">

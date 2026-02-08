@@ -1,4 +1,6 @@
 <div>
+            @section('title') {{'Checkout'}} @endsection
+
 
     <div class="container">
         <div class="row">
@@ -14,7 +16,7 @@
     </div>
 
     <div class="container">
-    
+
         @if($cart = \App\Helpers\Cart\Cart::getCart())
 
                 <div class="row">

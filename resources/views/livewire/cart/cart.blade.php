@@ -1,4 +1,6 @@
 <div>
+                @section('title') {{'Cart'}} @endsection
+
 
     <div class="container">
         <div class="row">

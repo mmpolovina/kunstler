@@ -1,4 +1,5 @@
 <div>
+            @section('title') {{'Your Orders'}} @endsection
 
     <div class="container">
         <div class="col-12">

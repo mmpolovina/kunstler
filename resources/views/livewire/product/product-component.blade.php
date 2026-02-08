@@ -1,4 +1,5 @@
 <div>
+        @section('title') {{'Product - ' . $product->title}} @endsection
 
     <div class="container">
         <div class="row">
@@ -72,7 +73,7 @@
                                     </div>
                                 </div>
                             </button>
-                    
+
                         </div>
                     </div>
 
@@ -138,7 +139,7 @@
                                     aria-selected="false">Features</button>
                             </li>
                         @endif
-        
+
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
@@ -162,7 +163,7 @@
                                 </table>
                             </div>
                         @endif
-        
+
                     </div>
                 </div>
             </div>
@@ -189,7 +190,7 @@
         </div>
     </section>
     @endif
-   
+
 
 </div>
 

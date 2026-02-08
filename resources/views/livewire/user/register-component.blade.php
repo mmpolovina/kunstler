@@ -1,4 +1,5 @@
 <div>
+            @section('title') {{'Registration'}} @endsection
 
     <div class="container">
         <div class="row">

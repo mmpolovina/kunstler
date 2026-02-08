@@ -1,4 +1,5 @@
 <div>
+    @section('title') {{'Home Page'}} @endsection
 
     <div id="carousel" class="carousel slide carousel-fade">
         <div class="carousel-indicators">
@@ -133,7 +134,7 @@
     @endif
 
     @if ($new_products->isNotEmpty())
-    
+
     <section class="new-products">
         <div class="container">
             <div class="row mb-5">
@@ -143,16 +144,16 @@
                     </h2>
                 </div>
             </div>
-    
+
             <div class="owl-carousel owl-theme owl-carousel-full" wire:ignore>
                 @foreach ($new_products as $product)
-    
+
                 <div wire:key="{{ $product->id}}">
                     @include('incs.product-card')
                 </div>
                 @endforeach
             </div>
-    
+
         </div>
     </section>
     @endif
