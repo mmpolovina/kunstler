@@ -14,7 +14,7 @@
                             <a class="dropdown-item" href="{{  route('register') }}" wire:navigate>Register</a>
                         </li>
                     @endguest
-                    
+
                     @auth
 
                         <li>
@@ -23,7 +23,7 @@
                         @if (auth()->user()->is_admin)
 
                             <li>
-                                <a class="dropdown-item" href="#">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('admin') }}">Admin Dashboard</a>
                             </li>
                         @endif
 
@@ -32,7 +32,7 @@
                         </li>
                     @endauth
 
-                   
+
                 </ul>
             </div>
         </div>

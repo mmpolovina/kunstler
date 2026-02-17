@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\HomeComponent;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,4 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', \App\Livewire\User\OrderComponent::class)->name('orders');
     Route::get('/order-show/{id}', \App\Livewire\User\OrderShowComponent::class)->name('order-show');
 
+});
+
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/', \App\Livewire\Admin\HomeComponent::class)->name('admin');
 });
