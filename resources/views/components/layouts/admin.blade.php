@@ -17,6 +17,7 @@
         rel="stylesheet">
 
     <link href="{{ asset('assets/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/main.css') }}" rel="stylesheet">
 
     <script src="{{ asset('assets/admin/vendor/jquery/jquery.min.js') }}" defer></script>
     <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
@@ -50,6 +51,12 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.categories.index') }}" wire:navigate>
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Categories</span></a>
+        </li>
+
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -134,6 +141,24 @@
             <div class="container-fluid">
 
                 <h1 class="h3 mb-3 text-gray-800">{{ $title ?? 'Admin page' }}</h1>
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
 
                 {{ $slot }}
 
