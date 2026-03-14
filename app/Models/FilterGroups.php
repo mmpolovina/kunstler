@@ -9,5 +9,7 @@ class FilterGroups extends Model
     protected $table = 'filter_groups';
     protected $fillable = ['title'];
     public $timestamps = false;
+
     
+
 }

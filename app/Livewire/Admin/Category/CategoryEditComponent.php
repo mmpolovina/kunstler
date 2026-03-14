@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin\Category;
 
 use App\Models\Category;
+use App\Models\FilterGroups;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -17,6 +19,7 @@ class CategoryEditComponent extends Component
     public int $parent_id = 0;
     public int $id;
     public Category $category;
+    public array $selectedCategoryFilters = [];
 
     public function mount(Category $category)
     {
@@ -24,33 +27,72 @@ class CategoryEditComponent extends Component
         $this->title = $category->title;
         $this->parent_id = $category->parent_id;
         $this->category = $category;
+        $this->selectedCategoryFilters = DB::table('category_filters')
+            ->where('category_id', $this->id)
+            ->pluck('filter_group_id')
+            ->toArray();
 
     }
 
     public function save()
     {
-        $category = $this-> validate([
+        $category = $this->validate([
 
             'title' => 'required|string|max:255',
             'parent_id' => 'required|integer',
+            'selectedCategoryFilters.*' => 'numeric',
+
         ]);
 
-        $parentCategorySlug = $category['parent_id'] ? Category::find($category['parent_id'])->slug.'-' : '';
+
+        $parentCategorySlug = $category['parent_id'] ? Category::find($category['parent_id'])->slug . '-' : '';
         $category['slug'] = Str::slug($parentCategorySlug . $this->title);
-        if (Category::where('slug', $category['slug'])->exists()) {
+
+        if ($category['slug'] !== $this->category->slug && Category::where('slug', $category['slug'])->exists()) {
             $this->addError('title', 'The title has already been taken.');
             return redirect()->back();
         }
 
-        $this->category->update($category);
+        try {
 
-        session()->flash('success', 'Category updated successfully.');
-        cache()->forget('categories_html');
-        $this->redirectRoute(name: 'admin.categories.index',  navigate: true);
+            DB::beginTransaction();
+
+            DB::table('category_filters')
+                ->where('category_id', $this->category->id)
+                ->delete();
+
+            if (!empty($this->selectedCategoryFilters)) {
+
+                $categoryFilters = array_map(function ($filterGroupId) {
+                    return ['filter_group_id' => $filterGroupId, 'category_id' => $this->category->id];
+                }, $category['selectedCategoryFilters']);
+
+                DB::table('category_filters')->insert($categoryFilters);
+            }
+
+            $this->category->update($category);
+
+            DB::commit();
+
+            session()->flash('success', 'Category updated successfully.');
+            cache()->forget('categories_html');
+            $this->redirectRoute(name: 'admin.categories.index', navigate: true);
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'An error occurred while updating the category.');
+            return redirect()->back();
+        }
+
+
 
     }
     public function render()
     {
-        return view('livewire.admin.category.category-edit-component');
+
+        $filter_groups = FilterGroups::all();
+
+        return view('livewire.admin.category.category-edit-component', compact('filter_groups'));
     }
 }
