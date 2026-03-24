@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/uploads
 /public/img/products
 /storage/*.key
 /storage/pail
@@ -26,5 +27,5 @@ yarn-error.log
 .DS_Store
 docker-compose.yml
 docker-entrypoint.sh
-dockerfile 
-.env.docker 
+dockerfile
+.env.docker
