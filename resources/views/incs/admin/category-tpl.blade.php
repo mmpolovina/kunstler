@@ -7,7 +7,7 @@
         <a href="{{ route('admin.categories.edit', $item['id']) }}" class="btn btn-secondary btn-sm">
             <i class="far fa-edit"></i>
         </a>
-        <button wire:click="deleteCategory({{ $item['id'] }})" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">
+        <button wire:click="deleteCategory({{ $item['id'] }})" wire:confirm="Are you sure?" class="btn btn-danger btn-sm">
             <i class="fas fa-trash"></i>
         </button>
 

@@ -56,6 +56,11 @@
                 <i class="fa-solid fa-layer-group"></i>
                 <span>Categories</span></a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.products.index') }}" wire:navigate>
+                <i class="fa-solid fa-list"></i>
+                <span>Products</span></a>
+        </li>
 
 
         <!-- Sidebar Toggler (Sidebar) -->
