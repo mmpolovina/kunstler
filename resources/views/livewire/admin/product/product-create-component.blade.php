@@ -1,3 +1,9 @@
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+@endpush
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js" defer></script>
+@endpush
 <div class="row">
 
     <div class="col-12 mb-4 position-relative">
@@ -123,11 +129,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="content" class="form-label">Description</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content"
+                        <label for="summercontent" class="form-label">Description</label>
+                        <div wire:ignore>
+                            <textarea class="form-control @error('content') is-invalid @enderror" id="summercontent"
                             placeholder="Product description" wire:model="content" rows="10"></textarea>
+                        </div>
                         @error('content')
-                            <div class="invalid-feedback">
+                            <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -215,3 +223,20 @@
     </div>
 
 </div>
+
+@script
+     <script>
+        
+        $(function() {
+            $('#summercontent').summernote({
+                height: 300,
+                callbacks: {
+                    onChange: function(contents, $editable) {
+                        $wire.$set('content', contents, false);
+                    }
+                }
+            });
+        });
+
+    </script>
+@endscript

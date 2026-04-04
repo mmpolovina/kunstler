@@ -31,7 +31,7 @@
                             <td>{{ $item->category->title }}</td>
                             <td>
                                 <a href="{{ route('product', $item->slug) }}" class="btn btn-secondary btn-sm" target="_blank">
-                                    <i class="far fa-edit"></i>
+                                    <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-secondary btn-sm">
                                     <i class="far fa-edit"></i>
