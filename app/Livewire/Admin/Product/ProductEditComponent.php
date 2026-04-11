@@ -7,6 +7,7 @@ use App\Models\Filters;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -21,6 +22,7 @@ class ProductEditComponent extends Component
     public Product $product;
     public $photo;
     public $photos;
+    public $deletePhotos = [];
 
     public function mount(Product $product)
     {
@@ -49,9 +51,9 @@ class ProductEditComponent extends Component
             return redirect()->back()->withErrors($this->getErrorBag());
         }
 
-
         if (!empty($validate['image'])) {
             $validate['image'] = $this->saveImage($validate['image']);
+            Storage::disk('public_uploads_delete')->delete($this->photo);
         }else {
             $validate['image'] = $this->photo;
         }
@@ -64,6 +66,9 @@ class ProductEditComponent extends Component
         }else {
             $validate['gallery'] = $this->photos;
 
+        }
+        if (!empty($this->deletePhotos)) {
+            Storage::disk('public_uploads_delete')->delete($this->deletePhotos);
         }
         try {
 
@@ -102,6 +107,7 @@ class ProductEditComponent extends Component
     public function removeGalleryItem($index)
     {
         if (isset($this->photos[$index])) {
+            $this->deletePhotos[] = $this->photos[$index];
             unset($this->photos[$index]);
             $this->photos = array_values($this->photos); // Reindex the array
         }

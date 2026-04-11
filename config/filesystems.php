@@ -63,6 +63,10 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads'),
         ],
+        'public_uploads_delete' => [
+            'driver' => 'local',
+            'root' => public_path(),
+        ],
     ],
 
     /*
@@ -78,6 +82,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+
     ],
 
 ];
