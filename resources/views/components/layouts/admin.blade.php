@@ -63,6 +63,18 @@
                 <i class="fa-solid fa-list"></i>
                 <span>Products</span></a>
         </li>
+        <hr class="sidebar-divider">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filter_groups.index') }}" wire:navigate>
+                <i class="fa-solid fa-filter"></i>
+                <span>Filter Groups</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('admin.filters.index') }}" wire:navigate>
+                <i class="far fa-filter" style="color: rgb(175, 177, 180);"></i>
+                <span>Filters</span></a>
+        </li>
+        <hr class="sidebar-divider">
 
 
         <!-- Sidebar Toggler (Sidebar) -->

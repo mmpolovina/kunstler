@@ -1,6 +1,12 @@
 <div class="row">
 
-<div class="col-12 mb-4">
+<div class="col-12 mb-4 position-relative">
+
+         <div class="update-loading" wire:loading>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
     <div class="card shadow mb-4">
         <div class="card-header">
