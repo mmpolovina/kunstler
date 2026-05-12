@@ -4,7 +4,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header">
-                <a href="{{ route('admin.filter_groups.index') }}" class="btn btn-primary">Filter Groups List</a>
+                <a href="{{ route('admin.filters.index') }}" class="btn btn-primary">Filters List</a>
             </div>
             <div class="card-body">
 
@@ -12,8 +12,24 @@
                     <div class="mb-3">
                         <label for="title" class="form-label required">Title</label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                            placeholder="Filter Group Name" wire:model="title">
+                            placeholder="Filter Name" wire:model="title">
                         @error('title')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="filter_group_id" class="form-label required">Filter Group</label>
+                        
+                            <select class="custom-select  @error('filter_group_id') is-invalid @enderror" wire:model="filter_group_id">
+                                <option value="">Select Filter Group</option>
+
+                                @foreach ($filter_groups  as  $k => $group)
+                                     <option value="{{ $group->id }}">{{ $group->title }}</option>
+                                @endforeach
+                            </select>
+                        @error('filter_group_id')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

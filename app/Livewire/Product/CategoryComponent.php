@@ -110,6 +110,7 @@ class CategoryComponent extends Component
             ->join('filter_groups', 'category_filters.filter_group_id', '=', 'filter_groups.id')
             ->join('filters', 'filters.filter_group_id', '=', 'filter_groups.id')
             ->whereIn('category_filters.category_id', explode(',', $ids))
+            ->groupBy('filters.id')
             ->get();
         $filter_groups = [];
         foreach($category_filters as $filter){
