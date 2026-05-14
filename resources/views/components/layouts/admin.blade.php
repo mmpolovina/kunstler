@@ -48,31 +48,38 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ route('admin') }}" wire:navigate>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin') }}" wire:navigate wire:current.exact="active">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ route('admin.categories.index') }}" wire:navigate>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('admin.categories.index') }}" wire:navigate  wire:current="active">
                 <i class="fa-solid fa-layer-group"></i>
                 <span>Categories</span></a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ route('admin.products.index') }}" wire:navigate>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.products.index') }}" wire:navigate  wire:current="active">
                 <i class="fa-solid fa-list"></i>
                 <span>Products</span></a>
         </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ route('admin.filter_groups.index') }}" wire:navigate>
+        <hr class="sidebar-divider my-0">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.filter_groups.index') }}" wire:navigate  wire:current="active">
                 <i class="fa-solid fa-filter"></i>
                 <span>Filter Groups</span></a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ route('admin.filters.index') }}" wire:navigate>
-                <i class="far fa-filter" style="color: rgb(175, 177, 180);"></i>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.filters.index') }}" wire:navigate  wire:current="active">
+                <i class="far fa-filter"></i>
                 <span>Filters</span></a>
+        </li>
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.orders.index') }}" wire:navigate  wire:current="active">
+                <i class="far fa-bag-shopping"></i>
+                <span>Orders</span></a>
         </li>
         <hr class="sidebar-divider">
 

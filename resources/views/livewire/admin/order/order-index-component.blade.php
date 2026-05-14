@@ -10,7 +10,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('admin.filters.create') }}" class="btn btn-primary">Create filter</a>
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-primary">Orders list</a>
         </div>
         <div class="card-body">
 
@@ -20,22 +20,30 @@
                     <thead>
                     <tr>
                         <th style="width: 5%">Id</th>
-                        <th>Title</th>
-                        <th>Filter Group</th>
+                        <th>User name</th>
+                        <th>User email</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($filters as $item)
-                        <tr wire:key="filter-{{ $item->id }}">
+                        @foreach($orders as $item)
+                        <tr wire:key="order-{{ $item->id }}">
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->group->title }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->status ?  "Completed" :"Pending"  }}</td>
+                            <td>${{ number_format($item->total, 0) }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->updated_at }}</td>
                             <td>
-                                <a href="{{ route('admin.filters.edit', $item->id) }}" class="btn btn-secondary btn-sm">
+                                <a href="{{ route('admin.orders.edit', $item->id) }}" class="btn btn-secondary btn-sm">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <button wire:click="deleteFilter({{ $item->id }})" wire:confirm="Are you sure?" class="btn btn-danger btn-sm">
+                                <button wire:click="deleteOrder({{ $item->id }})" wire:confirm="Are you sure?" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -44,7 +52,7 @@
                     </tbody>
                 </table>
             </div>
-            {{ $filters->links() }}
+            {{ $orders->links() }}
         </div>
     </div>
 

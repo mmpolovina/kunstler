@@ -13,3 +13,9 @@ label.required::before {
     text-align: center;
     padding-top: 20px;
 }
+
+.sidebar .nav-item .nav-link.active,
+.sidebar .nav-item .nav-link.active i,
+.sidebar .nav-item .nav-link.active span {
+    color: #44e986;
+}

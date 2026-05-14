@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('components.layouts.admin')]
 #[Title('Filters')]
 class FilterIndexComponent extends Component
 {
+    use WithPagination;
     public function deleteFilter(Filters $filter)
     {
         try {

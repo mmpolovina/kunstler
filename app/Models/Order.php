@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'name', 'email', 'note', 'total'];
+    protected $fillable = ['user_id', 'name', 'email', 'note', 'total', 'status'];
 
+    public function delete()
+    {
+        // Delete related filter products
+        $this->orderProducts()->delete();
+
+        return parent::delete();
+    }
     public function orderProducts(): HasMany
     {
         return $this->hasMany(OrderProduct::class);
