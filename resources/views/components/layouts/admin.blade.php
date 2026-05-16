@@ -81,6 +81,13 @@
                 <i class="far fa-bag-shopping"></i>
                 <span>Orders</span></a>
         </li>
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.users.index') }}" wire:navigate  wire:current="active">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span></a>
+        </li>
         <hr class="sidebar-divider">
 
 

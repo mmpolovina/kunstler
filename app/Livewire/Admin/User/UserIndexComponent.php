@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Livewire\Admin\User;
+
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+#[Layout('components.layouts.admin')]
+#[Title('Users')]
+class UserIndexComponent extends Component
+{
+    use WithPagination;
+
+    public function deleteUser(User $user)
+    {
+        try {
+            DB::beginTransaction();
+            $user->delete();
+            DB::commit();
+            session()->flash('success', 'User deleted successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Failed to delete user: ' . $e->getMessage());   
+        }
+
+        return $this->redirectRoute(name: 'admin.users.index', navigate: true);
+    }
+    public function render()
+    {
+        $users = User::query()->orderBy('id', 'desc')->paginate();
+        return view('livewire.admin.user.user-index-component', compact('users'));
+    }
+}
